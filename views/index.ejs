@@ -1,0 +1,12 @@
+<html>
+  <h1><%= title %></h1>
+  <% messages.map(message=>{%>
+  <div>
+    <h2>Text: <%= message.post %></h2>
+    <h3>Author: <%= message.name %></h3>
+    <h3>Time Posted: <%= message.date %></h3>
+    <hr />
+  </div>
+  <% }) %>
+  <a href="/new">Add</a>
+</html>
