@@ -34,8 +34,7 @@ router.get("/new", (req, res) => {
 });
 router.post("/new", (req, res) => {
   let messageText = req.body.messageText;
-  let messageUser = req.body.messageUser;
-  insertPost(messageText, messageUser);
+  insertPost(messageText, req.user.username, new Date(), req.user.group_id);
   res.redirect("/");
 });
 

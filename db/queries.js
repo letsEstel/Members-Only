@@ -5,10 +5,10 @@ async function getPosts() {
   return rows;
 }
 
-async function insertPost(post, name) {
+async function insertPost(post, username, date, groupId) {
   await pool.query(
-    "INSERT INTO messages (post, name, date) VALUES ($1, $2, NOW())",
-    [post, name]
+    "INSERT INTO messages (post, username, date, group_id) VALUES ($1, $2, $3, $4)",
+    [post, username, date, groupId]
   );
 }
 

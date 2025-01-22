@@ -1,5 +1,5 @@
 <form method="POST" action="/new">
-  <p>Form</p>
+  <p>Write Your Post</p>
   <label for="messageText">Text:</label>
   <br />
   <textarea
@@ -7,10 +7,6 @@
     id="messageText"
     oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';"
   ></textarea>
-  <br />
-  <label for="messageUser">Author: </label>
-  <br />
-  <input type="text" name="messageUser" id="messageUser" />
   <br />
   <button type="submit">Submit</button>
 </form>
