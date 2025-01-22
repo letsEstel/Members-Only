@@ -1,12 +1,21 @@
 <html>
   <h1><%= title %></h1>
-  <% messages.map(message=>{%>
+  <hr />
+  <% if (locals.user) {%>
+  <h2>WELCOME BACK <%= user.username %></h2>
+  <a href="/log-out">LOG OUT</a>
+  <% } else { %>
+  <a href="/sign-up">Sign Up here</a>
+  <a href="/log-in">Log in here</a>
+  <% }%> <% messages.map(message=>{%>
   <div>
     <h2>Text: <%= message.post %></h2>
-    <h3>Author: <%= message.name %></h3>
+    <h3>Author: <%= message.username %></h3>
     <h3>Time Posted: <%= message.date %></h3>
+    <h3>Group: <%= message.group_id%></h3>
     <hr />
   </div>
-  <% }) %>
+  <% }) %> <% if (locals.user) {%>
   <a href="/new">Add</a>
+  <%}%>
 </html>

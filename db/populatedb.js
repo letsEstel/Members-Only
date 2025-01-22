@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS groups (
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
-    pwd TEXT NOT NULL,
+    password TEXT NOT NULL,
     group_id INT REFERENCES groups(id) ON DELETE CASCADE
 );
 
@@ -28,10 +28,10 @@ CREATE TABLE IF NOT EXISTS messages (
 // Sample groups, users, and messages
 const groups = ["Gensis", "2049"];
 const users = [
-  { username: "Alice", password: "alicepwd", group: "Gensis" },
-  { username: "Joi", password: "joipwd", group: "2049" },
-  { username: "Charlie", password: "charliepwd", group: "Gensis" },
-  { username: "Diana", password: "dianapwd", group: "Gensis" },
+  { username: "Alice", password: "Alice", group: "Gensis" },
+  { username: "Joi", password: "Joi", group: "2049" },
+  { username: "Charlie", password: "Charlie", group: "Gensis" },
+  { username: "Diana", password: "Diana", group: "Gensis" },
 ];
 const messages = [
   {
@@ -95,7 +95,7 @@ async function populateDatabase() {
 
       // Insert the user
       await client.query(
-        "INSERT INTO users (username, pwd, group_id) VALUES ($1, $2, $3) ON CONFLICT (username) DO NOTHING",
+        "INSERT INTO users (username, password, group_id) VALUES ($1, $2, $3) ON CONFLICT (username) DO NOTHING",
         [username, hashedPassword, groupId]
       );
     }

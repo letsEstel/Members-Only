@@ -7,6 +7,8 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const pool = require("./db/pool");
+require("dotenv").config();
+const bcrypt = require("bcryptjs");
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -20,7 +22,9 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      if (user.password !== password) {
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
+        // passwords do not match!
         return done(null, false, { message: "Incorrect password" });
       }
       return done(null, user);
@@ -53,6 +57,7 @@ app.use(
     store: new (require("connect-pg-simple")(session))({
       // Insert connect-pg-simple options here
       createTableIfMissing: true,
+      conString: process.env.CONNECTION_STRING,
     }),
     secret: process.env.FOO_COOKIE_SECRET,
     resave: false,
